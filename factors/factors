@@ -1,0 +1,12 @@
+#!/bin/bash
+start_time=$(date +%s.%N)
+python3 factorize.py numbers.txt
+end_time=$(date +%s.%N)
+
+real_time=$(echo "$end_time - $start_time" | bc)
+user_time=$(python3 -c "import resource; print(resource.getrusage(resource.RUSAGE_CHILDREN).ru_utime)")
+sys_time=$(python3 -c "import resource; print(resource.getrusage(resource.RUSAGE_CHILDREN).ru_stime)")
+echo " "
+echo "real    ${real_time}s"
+echo "user    ${user_time}s"
+echo "sys     ${sys_time}s"
